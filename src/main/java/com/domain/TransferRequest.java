@@ -1,23 +1,28 @@
 package com.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.util.TransactionIdGenerator;
+import com.util.UUIDGenerator;
 
 import java.math.BigDecimal;
 
 public class TransferRequest {
     private String transactionId;
-    private Integer fromAccountId;
-    private Integer toAccountId;
+    private String fromAccount;
+    private String toAccount;
     private BigDecimal amount;
+    private UUIDGenerator transactionIdGenerator;
 
     public TransferRequest() {
         // Needed by Jackson deserialization
+        this.transactionIdGenerator = new TransactionIdGenerator();
     }
 
-    public TransferRequest(Integer fromAccountId, Integer toAccountId, Integer amount) {
-        this.transactionId = "00000";
-        this.fromAccountId = fromAccountId;
-        this.toAccountId = toAccountId;
+    public TransferRequest(String fromAccount, String toAccount, Integer amount) {
+        this();
+        this.transactionId = transactionIdGenerator.generateUUId();
+        this.fromAccount = fromAccount;
+        this.toAccount = toAccount;
         this.amount = new BigDecimal(amount);
     }
 
@@ -27,13 +32,13 @@ public class TransferRequest {
     }
 
     @JsonProperty
-    public Integer getFromAccountId() {
-        return fromAccountId;
+    public String getFromAccount() {
+        return fromAccount;
     }
 
     @JsonProperty
-    public Integer getToAccountId() {
-        return toAccountId;
+    public String getToAccount() {
+        return toAccount;
     }
 
     @JsonProperty

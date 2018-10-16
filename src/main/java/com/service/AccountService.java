@@ -1,13 +1,35 @@
 package com.service;
 
-import java.util.Random;
+import com.domain.Account;
+import com.repository.AccountRepository;
+
+import java.util.List;
 
 public class AccountService {
 
-    public static void main(String[] args) {
-            long a = java.util.UUID.randomUUID().getMostSignificantBits();
-        Double d = Math.abs(Math.E * Math.sin(a)) * 100000000;
-        Random r = new Random(a);
-        System.out.println(r.nextInt());
+    private AccountRepository accountRepository;
+
+    public AccountService(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
+
+    public Account find(int id) {
+        return (Account) accountRepository.find(id);
+    }
+
+    public Account findByAccountNumber(String accNum) {
+        return accountRepository.findByAccountNumber(accNum);
+    }
+
+    public Account findByIban(String iban) {
+        return accountRepository.findByiban(iban);
+    }
+
+    public List<Account> findAll() {
+        return accountRepository.findAll();
+    }
+
+    public void updateAccountBalance(Account account) {
+        accountRepository.updateAccount(account);
     }
 }

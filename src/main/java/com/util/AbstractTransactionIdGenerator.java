@@ -1,6 +1,6 @@
 package com.util;
 
-public abstract class AbstractTransactionIdGenerator implements UUIDGenerator {
+    public abstract class AbstractTransactionIdGenerator implements UUIDGenerator {
 
     /**
      * Generate the universally unique transaction id for generic type of transaction
